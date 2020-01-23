@@ -25,6 +25,7 @@ export class Tab1Page implements OnInit {
 
 	@ViewChildren(IonItemSliding) slidingItem: IonItemSliding[];
 	isItemOpened = false;
+	isSlideFirstTime = true;
 
 	// tslint:disable-next-line:max-line-length
 	constructor(private tab1Service: Tab1Service, private modalController: ModalController, private toastService: ToastService, private store: Store<AppState>) {
@@ -42,10 +43,23 @@ export class Tab1Page implements OnInit {
 			}
 		});
 		this.data$ = this.store.select(fromTab1.getData).pipe(
-			tap(data => console.log(data))
+			tap(data => {
+				if (data) {
+					if (this.isSlideFirstTime) {
+						setTimeout(() => {
+							// tslint:disable-next-line:no-string-literal
+							this.slidingItem['first'].open('end');
+							this.isSlideFirstTime = false;
+						}, 200);
+					}
+				}
+			})
 		);
 
 		this.store.dispatch(Tab1Actions.getEmployee());
+		/*setTimeout(() => {
+			this.slidingItem[0].open('end');
+		}, 200);*/
 	}
 
 	itemOpened(ev) {
