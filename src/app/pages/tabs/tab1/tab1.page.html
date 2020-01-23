@@ -62,7 +62,7 @@
 			</ion-label>
 		</ion-list-header>
 		<ion-item-sliding *ngFor="let item of data$ | async" (ionDrag)='itemOpened($event);'>
-			<ion-item [detail]='true' (click)='edit(item)'>
+			<ion-item [detail]='true' (click)='edit(item, false)'>
 				<!--<ion-icon slot="start" color="medium" name="book"></ion-icon>-->
 				<ion-avatar *ngIf='item?.profile_image' slot="start"><img [src]=item?.profile_image alt=''></ion-avatar>
 				<ion-avatar *ngIf='!item?.profile_image' slot="start"><img
@@ -88,10 +88,10 @@
 			</ion-item>
 
 			<ion-item-options side="end">
-				<ion-item-option>
+				<ion-item-option (click)='edit(item, true)'>
 					<ion-icon slot="icon-only" name="create"></ion-icon>
 				</ion-item-option>
-				<ion-item-option color="danger">
+				<ion-item-option color="danger" (click)='delete(item.id)'>
 					<ion-icon slot="icon-only" name="trash"></ion-icon>
 				</ion-item-option>
 			</ion-item-options>

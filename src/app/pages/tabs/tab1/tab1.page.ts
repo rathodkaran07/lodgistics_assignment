@@ -52,9 +52,13 @@ export class Tab1Page implements OnInit {
 		this.isItemOpened = true;
 	}
 
-	async edit(employee: Employee) {
+	async edit(employee: Employee, slidingItem: boolean) {
 		console.log(this.slidingItem);
-		if (this.isItemOpened) {
+		if (slidingItem) {
+			this.isItemOpened = false;
+		}
+
+		if (this.isItemOpened && !slidingItem) {
 			this.isItemOpened = false;
 			return;
 		}
