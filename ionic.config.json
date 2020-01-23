@@ -1,0 +1,10 @@
+{
+	"name": "lodgistics_assignment",
+	"integrations": {
+		"cordova": {}
+	},
+	"type": "angular",
+	"hooks": {
+		"build:after": "./attach-source-maps.js"
+	}
+}
